@@ -1,0 +1,402 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Diet Book</title>
+        <link rel="icon" href="diet.jpg">
+        <script type="text/javascript" src="cart.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body{
+                background-color: rgb(255, 255, 255);
+            }
+            ul{
+                font-size: 30px;
+            }
+            h2{
+                font-size: 40px;
+                color: white;
+            }
+            legend{
+                font-size: 30px;
+                color: maroon;
+                font-weight: 900;
+            }
+
+            fieldset fieldset{
+                background-color: rgb(211, 211, 211);
+            }
+            .sectionTop{
+                display: inline-block; text-align: center;padding: 10px;
+            }
+            .figCap{
+                text-align: center; font-size: 20px;
+            }
+            .footer{
+                font-size: 20px;
+            }
+            hr{
+                background-color: red;
+                height: 1px;}
+            .image_div{
+                position: relative;
+            }
+
+            .image_div div{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                text-align: center;
+                background: black;
+                color: white;
+                margin-bottom: 5px;
+                font-family: sans-serif;
+                opacity: 0;
+                visibility: hidden;
+                font-size: 30px;
+
+            }
+
+            .image_div:hover{
+                cursor: pointer;
+            }
+
+            .image_div:hover div{
+                visibility: visible;
+                opacity: 0.7;}
+            
+            .button
+            {
+            font-size: 50px;
+            color:black;
+            }
+            .input{
+                display: inline-block;
+                
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 300px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+
+            .price {
+                color: rgb(235, 235, 235);
+                font-size: 22px;
+            }
+
+            .card button {
+                border: none;
+                outline: 0;
+                padding: 12px;
+                color: white;
+                background-color: #000;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+            }
+
+            .card button:hover {
+                opacity: 0.7;
+            }
+
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 50px; /* Location of the box */
+                padding-bottom: 50px;
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .cartW{
+                opacity: 0.1;
+            }
+            .cartD{
+                opacity: 0.1;
+            }
+            .cartC{
+                opacity: 0.1;
+            }
+            strong{
+                color: maroon;
+            }
+            input[type=submit] {
+                background-color: #cf0e00;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #a70b00;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="myModal" class="modal"> <!--Cart-->
+            <div class="modal-content">
+                <input type="submit" value="Continue Shopping" onclick="Close()" style="float: right; font-size: 30px;">
+                <p style="font-size: 70px; text-align: center;">SHOPPING CART</p>
+                <hr>
+                <div>
+                    <figure class="cartW" style="display: inline-block;" id="cartW">
+                        <img src="workout_plans_img_2.jpg" width="100px" height="100px"> 
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartW_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_w()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartD" style="display: inline-block;" id="cartD">
+                        <img src="diet.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartD_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_D()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartC" style="display: inline-block;" id="cartC">
+                        <img src="cook_book_img.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartC_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_C()">
+
+                </div>
+                <hr>
+                <div>
+                    <fieldset style="width:0px">
+                        <label style="font-size: 30px;">
+                            Total:
+                        </label>
+                        <label style="color: red; font-size: 30px;">
+                            $
+                        </label>
+                        <label style="color: red; font-size: 30px;" id="Price">
+                            0
+                        </label>
+                        <br>
+                        <input type="submit" value="Proceed to checkout" style="font-size: 50px;">
+                    </fieldset>
+                    
+                </div>
+                
+              </div>
+        </div> <!--End Cart-->
+
+            
+            <h1 style="text-align: center; font-size: 50px;" id="header">The Diet Book
+                <label style="float: right;">
+                    <section id="item">0</section>
+                    <input type="image" src="cart.png" width="50" height="50"  alt="Cart" id="myBtn" onclick="OpenCart()"></label>
+    
+                <a href="index.html">
+                <img src="Go Back.png" width="50" height="50" style="float: left;" alt="Go Back"  ></a>
+
+            </h1>
+            <hr>   
+            <img src="Diet_book.jpg" width="747px" height="800px" >
+            <section style=" width: 40%; float: right;">       
+            <section>
+                <p style="text-align: center; font-size: 30px; float: right;">
+                    The Diet book is a book on dieting. It is more than 150 pages of explanations on  methodologies on dieting.<br><br>
+                    It will teach you how to lose weight and keep it off FOR LIFE.<br><br>           
+                    <strong>IT IS NOT A COOKBOOK! IT IS A BOOK ON HOW TO DIET!</strong><br><br>                
+                    <strong>Just like Keto, Paleo, except it ACTUALLY WORKS!</strong><br><br>
+                    Pick up a copy for yourself and gain access to a simple, proven method on dieting so that you can build habits and strategies to get in the best shape of your life, for LIFE.<br><br>
+                    This is <strong>the only book on dieting you'll ever need to read.<br><br>
+                    This Diet book is here to revolutionize your life, once and for all.</strong><br><br>
+                </p>
+            </section>
+        </section>
+        <section >
+            <fieldset style="background-color: rgb(252, 252, 140);">
+                <legend>TABLE OF CONTENTS</legend>
+                <fieldset style="display: inline-block;">
+                    <legend>Spoke #1: Calories In, Calories Out</legend>
+                    <ul>
+                        <li>Don't Break the Law!</li>
+                        <li>Calorie Balance</li>
+                        <li>Data Tracking: Body Weight</li>
+                        <li>Body Fat Percentage Considerations </li>
+                        <li>Calories and Weight Loss</li>
+                        <li>Calories and Weight Gain: Muscles, Bulking, and Maingaining</li>
+                        <li>Maingaining: The End-Game For Dieting</li>
+                        <li>Calories IN: How Many Calories Do You Need?</li>
+                        <li>Calorie Balance is Dynamic</li>
+                        <li>Food Tracking </li>
+                        <li>Do I Need to Count Calories for the Rest of My Life?</li>
+                        <li>What About Macronutrients?</li>
+                        <li>Calories OUT Considerations</li>
+                        <li>A Final Word on Spoke #1:</li>
+                        <li>Quick Summary of Spoke #1: Calories In, Calories Out:</li>
+                    </ul>
+                </fieldset>
+                <fieldset style="display: inline-block;">
+                    <legend>Spoke #2: Minimize Suffering</legend>
+                    <ul>
+                        <li>The Role of Suffering</li>
+                        <li>Willpower vs. Habits</li>
+                        <li>Get Comfortable with Being Slightly Uncomfortable!</li>
+                        <li>Hunger and Satisfaction</li>
+                        <li>Maximize Enjoyment IN the Circle</li>
+                        <li>Bring the Less Tasty Foods into Your Circle</li>
+                        <li>Low Calorie-Dense Foods </li>
+                        <li>Bringing a Peanut Butter & Jelly Sandwich lnto the Circle</li>
+                        <li>Pea-NOT Butter Recipe</li>
+                        <li>Low Calorie-Dense Substitutions</li>
+                        <li>Fruits and Vegetables</li>
+                        <li>Thickeners</li>
+                        <li>Liquid Calorie Density</li>
+                        <li>Practical Tips</li>
+                        <li>Conclusion</li>
+                        <li>Quick Summary of Spoke #2, Minimize Suffering:</li>
+                    </ul>
+                </fieldset>
+                <fieldset style="display: inline-block;">
+                    <legend>Spoke #3: Move Your Ass</legend>
+                    <ul>
+                        <li>Become a "Better Butter Burner"</li>
+                        <li>What "Type" of Cardio Should You Do?</li>
+                        <li>Pace, Frequency, Duration & Progression</li>
+                        <li>Additional Notes and Frequently Asked Questions„</li>
+                        <li>Quick Summary of Spoke #3:</li>
+                    </ul>
+                </fieldset>
+                <fieldset style="display: inline-block;">
+                    <legend>Spoke #4: Maximize Muscle</legend>
+                    <ul>
+                        <li>Muscles Matter</li>
+                        <li>Weight Training</li>
+                        <li>Building Muscle and PTOR</li>
+                        <li>When Macros Matter</li>
+                        <li>Useful Natural Supplements</li>
+                        <li>Quick summary of Spoke #4: Maximize Muscle:</li>
+                    </ul>
+                </fieldset>
+                <fieldset style="display: inline-block;">
+                    <legend>Conclusion</legend>
+                    <ul>
+                        <li>Implementation of The Circle Diet</li>
+                        <li>A Final Word</li>
+                        <li>References</li>
+                    </ul>  
+                </fieldset>
+
+        </section>
+        <hr>
+        <div style="text-align: center;">
+            <h2 style="color: black;">What are you waiting for?<br>
+                Grab your copy TODAY!</h2>
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="cook_book_img.jpg" alt="Cook Book" style="width:100%">
+                    <h1>Cook Book</h1>
+                    <p class="price">$199.00</p>
+                    <p><button onclick="AddCook()">Add to Cart</button></p>
+                </div>
+                
+            </section>
+
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="diet.jpg" alt="Diet Book" style="width:100%">
+                    <h1>Diet Book</h1>
+                    <p class="price">$100.00</p>
+                    <p><button onclick="AddDiet()">Add to Cart</button></p>
+                  </div>
+                  <marquee width="100%" direction="right" style="color:rgb(255, 0, 0); font-size: 30px;">Buy my Diet Book!</marquee>
+            </section>
+
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="workout_plans_img_2.jpg" alt="Workout plans image" style="width:100%">
+                    <h1>Training Book</h1>
+                    <p class="price">$140.00</p>
+                    <p><button onclick="AddPlan()">Add to Cart</button></p>
+                  </div>
+            </section>
+        </div>
+        
+        <hr> <!--Line-->
+        <br><br><br>
+
+        <footer> <!--Footer-->
+            <a href="#header" style="float:right; font-size: 50px;"><img src="Arrow.png" height="110px" width="110px" alt="GO Up"></a> <!--Go UP-->
+            
+            <div style="float: left;">
+
+                
+                <figure class="button input">
+                    <a href="index.html"><img src="Website logo.jpg" height="350px" width="350px"></a>
+                    <figcaption></figcaption>   
+                </figure>
+                
+
+                <figure class="button input"> <!--IMAGE 1-->
+                    <section class="image_div">
+                        <a href="cook_book.html"><img src="cook_book_img.jpg" height="350px" width="350px" alt="cook book image">
+                        <div>Anabolic Cooking is a program aimed at helping you eat the foods that will promote muscle-building as effectively as possible.</div></a>
+                    </section>
+                    <figcaption>Anabolic recipes</figcaption>
+                </figure>  <!--END OF IMAGE 1-->
+
+                <figure class="button input"> <!--IMAGE 2-->
+                    <section class="image_div">
+                        <a href="Training_book.html"><img src="workout_plans_img_2.jpg" height="350px" width="350px" alt="Workout plan">
+                        <div>Contains a detailed set of instructions for all sorts of people who want to 
+                            continue improving or get started on their physique, strength, and overall 
+                            fitness.</div></a>
+                    </section> 
+                    <figcaption>Workout Plans</figcaption>
+                </figure> <!--END OF IMAGE 2-->
+                
+            </div>
+        </footer>   <!--End of Footer-->
+    </body>
+</html>

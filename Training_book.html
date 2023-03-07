@@ -1,0 +1,380 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Training Book</title>
+        <link rel="icon" href="workout_plans_img_2.jpg">
+        <script type="text/javascript" src="cart.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            .sectionTop{
+                display: inline-block; text-align: center;padding: 10px;
+            }
+            .figCap{
+                text-align: center; font-size: 20px;
+            }
+            .footer{
+                font-size: 20px;
+            }
+            hr{
+                background-color: red;
+                height: 1px;}
+            .image_div{
+                position: relative;
+            }
+
+            .image_div div{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                text-align: center;
+                background: black;
+                color: white;
+                margin-bottom: 5px;
+                font-family: sans-serif;
+                opacity: 0;
+                visibility: hidden;
+                font-size: 30px;
+
+            }
+
+            .image_div:hover{
+                cursor: pointer;
+            }
+
+            .image_div:hover div{
+                visibility: visible;
+                opacity: 0.7;}
+            
+            .button
+            {
+            font-size: 50px;
+            color:black;
+            }
+            .input{
+                display: inline-block;
+                
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 300px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+
+            .price {
+                color: grey;
+                font-size: 22px;
+            }
+
+            .card button {
+                border: none;
+                outline: 0;
+                padding: 12px;
+                color: white;
+                background-color: #000;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+            }
+
+            .card button:hover {
+                opacity: 0.7;
+            }
+
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 50px; /* Location of the box */
+                padding-bottom: 50px;
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .cartW{
+                opacity: 0.1;
+            }
+            .cartD{
+                opacity: 0.1;
+            }
+            .cartC{
+                opacity: 0.1;
+            }
+            input[type=submit] {
+                background-color: #cf0e00;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #a70b00;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="myModal" class="modal"> <!--Cart-->
+            <div class="modal-content">
+                <input type="submit" value="Continue Shopping" onclick="Close()" style="float: right; font-size: 30px;">
+                <p style="font-size: 70px; text-align: center;">SHOPPING CART</p>
+                <hr>
+                <div>
+                    <figure class="cartW" style="display: inline-block;" id="cartW">
+                        <img src="workout_plans_img_2.jpg" width="100px" height="100px"> 
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartW_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_w()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartD" style="display: inline-block;" id="cartD">
+                        <img src="diet.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartD_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_D()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartC" style="display: inline-block;" id="cartC">
+                        <img src="cook_book_img.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartC_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_C()">
+
+                </div>
+                <hr>
+                <div>
+                    <fieldset style="width:0px">
+                        <label style="font-size: 30px;">
+                            Total:
+                        </label>
+                        <label style="color: red; font-size: 30px;">
+                            $
+                        </label>
+                        <label style="color: red; font-size: 30px;" id="Price">
+                            0
+                        </label>
+                        <br>
+                        <input type="submit" value="Proceed to checkout" style="font-size: 50px;">
+                    </fieldset>
+                    
+                </div>
+                
+              </div>
+        </div> <!--End Cart-->
+
+        <h1 style="text-align: center; font-size: 50px;" id="header">The Training Book
+            <label style="float: right;">
+                <section id="item">0</section>
+                <input type="image" src="cart.png" width="50" height="50"  alt="Cart" id="myBtn" onclick="OpenCart()"></label>
+
+            <a href="index.html">
+            <img src="Go Back.png" width="50" height="50" style="float: left;" alt="Go Back"  ></a>
+        </h1>
+
+        <hr>
+        <section style="padding: 30px;">
+            
+            <div style="width: 40%; font-size: 20px; display: inline-block; padding: 10px;">
+                <h1 style="font-size:40px; color: red; ">About The training book & training programs</h1>
+                <p> It contains more than 50 pages of foundational information on training, from 
+                    mindset, to more technical details on how to progress in both the short- and long-term.</p><br>
+                    <p>With reports of<strong> tremendous success from clients all around the world</strong>, I've decided to offer the 
+                    beginner, intermediate, and advanced training programs separately. This will offer a more cost-effective 
+                    option and allow you to pre-select the training program based on your experience level.</p><br>
+                    <p>Whether you choose beginner, intermediate, or advanced, your ebook will contain the FULL manual of 
+                    information on training, as well as<strong> 4 different programs to choose from:</strong></p>
+                    <ul>
+                        <li>60-minute program for strength</li>
+                        <li>60-minute program for hypertrophy (muscle-building)</li>
+                        <li>90-minute program for strength</li>
+                        <li>90-minute program for hypertrophy</li>
+                    </ul>
+            </div>
+            <div style="background-color: rgb(252, 252, 140); font-size: 20px; width: 50%; display: inline-block;">
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">Built-in flexibility depending on your time
+                        commitments. Both 60- and 90-minute training
+                        program options are included.</figcaption>
+                </div>
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">Training programs designed for your goals. Want to
+                        build strength? Muscle? Pick your focus and there's
+                        a program for you.</figcaption>
+                </div>
+                <br>
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">50+ pages of foundational (and educational)
+                         information on how to structure the BEST workout
+                         plan based on your individual circumstances</figcaption>
+                </div>
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">Cardio and diet guidelines covered. What kind of
+                        training book ALSO contains info on cardio and
+                         diet? Most don't... but Coach Greg's do!</figcaption>
+                </div>
+                <br>
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">Includes a HUGE exercise library to provide you with
+                         flexibility to choose exercises you like and can
+                         perform based on equipment availability</figcaption>
+                </div>
+                <div style="display: inline-block;  width: 40%;">
+                    <figure><img src="tick.png" width="40" height="40" alt="tick"></figure>
+                    <figcaption style="padding: 20px; text-align: justify;">Detailed guides into sets, reps, rest-times,
+                         weight/resistance, and intensity, as well as coaching
+                          instructions for each exercise.</figcaption>
+                </div>
+            </div>
+            <div>
+                <fieldset style="background-color: rgb(228, 228, 228); border-color: rgb(228, 228, 228);">
+                    <img src="coach gerg.jpg"  alt="coach greg" style="float: right; padding: 30px;">
+                    <div style="padding-top: 30px;">
+                        <figure><img src="tick.png" alt="tick" width="40" height="40"></figure>
+                        
+                        <figcaption>
+                            <h1>Easy to follow training programs</h1>
+                            <h2 style="font-weight: 100;">No overly complicated training plans that leave you feeling confused and deflated in the gym. Feel empowered with simple and sustainable training.<strong> 95% of customers said the training plans were easy to follow.</strong></h2>
+                        </figcaption>
+                    </div>
+                    <div style="padding-top: 30px;">
+                        <figure><img src="diamond.png" alt="diamond" width="40" height="40"></figure>
+                        <figcaption>
+                            <h1>High quality</h1>
+                            <h2 style="font-weight: 100;">Harder Than Last Time! The Complete Muscle & Strength Training Manual was rated a 4.6 on quality on average by 329 customers.</h2>
+                        </figcaption>
+                    </div>
+                    <div style="padding-top: 30px;">
+                        <figure><img src="rocket.png" alt="rocket" width="47" height="67"></figure>
+                        <figcaption>
+                            <h1>value, high satisfaction.</h1>
+                            <h2 style="font-weight: 100;">98% of customers would recommend Harder Than Last Time! training programs to a friend.</h2>
+                        </figcaption>
+                    </div>
+                </fieldset>
+
+            </div>
+        </section>
+
+        <hr>
+        <h1 style="text-align: center; font-size: 60px;">Ready to take your training to the next level?</h1>
+
+        <div style="text-align: center;">
+
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="cook_book_img.jpg" alt="Cook Book" style="width:100%">
+                    <h1>Cook Book</h1>
+                    <p class="price">$199.00</p>
+                    <p><button onclick="AddCook()">Add to Cart</button></p>
+                </div>
+                
+            </section>
+
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="workout_plans_img_2.jpg" alt="Workout plans image" style="width:100%">
+                    <h1>Training Book</h1>
+                    <p class="price">$140.00</p>
+                    <p><button onclick="AddPlan()">Add to Cart</button></p>
+                  </div>
+                  <marquee width="100%" direction="right" style="color: red; font-size: 30px;">Buy my Training Book!</marquee>
+            </section>
+
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="diet.jpg" alt="Diet Book" style="width:100%">
+                    <h1>Diet Book</h1>
+                    <p class="price">$100.00</p>
+                    <p><button onclick="AddDiet()">Add to Cart</button></p>
+                  </div>
+                  
+            </section>
+
+            
+        </div>
+        
+        <hr> <!--Line-->
+        <br><br><br>
+
+        <footer> <!--Footer-->
+            <a href="#header" style="float:right; font-size: 50px;"><img src="Arrow.png" height="110px" width="110px" alt="GO Up"></a> <!--Go UP-->
+            
+
+            <div style="float: left;">
+
+                
+                <figure class="button input">
+                    <a href="index.html"><img src="Website logo.jpg" height="350px" width="350px"></a>
+                    <figcaption></figcaption>   
+                </figure>
+                
+
+                <figure class="button input"> <!--IMAGE 1-->
+                    <section class="image_div">
+                        <a href="cook_book.html"><img src="cook_book_img.jpg" height="350px" width="350px" alt="cook book image">
+                        <div>Anabolic Cooking is a program aimed at helping you eat the foods that will promote muscle-building as effectively as possible.</div></a>
+                    </section>
+                    <figcaption>Anabolic recipes</figcaption>
+                </figure>  <!--END OF IMAGE 1-->
+
+                <figure class="button input"> <!--IMAGE 3-->
+                    <section class="image_div">
+                        <a href="Diet_book.html"><img src="diet.jpg" height="350px" width="350px" alt="Diet Methodologies">
+                        <div>You will learn how to lose weight and keep it off FOR LIFE.</div></a>
+                    </section>
+                    <figcaption>Dieting</figcaption>
+                </figure> <!--END OF IMAGE 3-->
+                
+            </div>
+        </footer>   <!--End of Footer-->
+    </body>
+</html>

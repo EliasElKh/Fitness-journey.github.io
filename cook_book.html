@@ -1,0 +1,393 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cook Book</title>
+        <link rel="icon" href="cook_book_img.jpg">
+        <script type="text/javascript" src="cart.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            .sectionTop{
+                display: inline-block; text-align: center;padding: 10px;
+            }
+            .figCap{
+                text-align: center; font-size: 20px;
+            }
+            .footer{
+                font-size: 20px;
+            }
+            hr{
+                background-color: red;
+                height: 1px;}
+            .image_div{
+                position: relative;
+            }
+
+            .image_div div{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                text-align: center;
+                background: black;
+                color: white;
+                margin-bottom: 5px;
+                font-family: sans-serif;
+                opacity: 0;
+                visibility: hidden;
+                font-size: 30px;
+
+            }
+
+            .image_div:hover{
+                cursor: pointer;
+            }
+
+            .image_div:hover div{
+                visibility: visible;
+                opacity: 0.7;}
+            
+            .button
+            {
+            font-size: 50px;
+            color:black;
+            }
+            .input{
+                display: inline-block;
+                
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 300px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+
+            .price {
+                color: grey;
+                font-size: 22px;
+            }
+
+            .card button {
+                border: none;
+                outline: 0;
+                padding: 12px;
+                color: white;
+                background-color: #000;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+            }
+
+            .card button:hover {
+                opacity: 0.7;
+            }
+
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 50px; /* Location of the box */
+                padding-bottom: 50px;
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .cartW{
+                opacity: 0.1;
+            }
+            .cartD{
+                opacity: 0.1;
+            }
+            .cartC{
+                opacity: 0.1;
+            }
+            input[type=submit] {
+                background-color: #cf0e00;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #a70b00;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="myModal" class="modal"> <!--Cart-->
+            <div class="modal-content">
+                <input type="submit" value="Continue Shopping" onclick="Close()" style="float: right; font-size: 30px;">
+                <p style="font-size: 70px; text-align: center;">SHOPPING CART</p>
+                <hr>
+                <div>
+                    <figure class="cartW" style="display: inline-block;" id="cartW">
+                        <img src="workout_plans_img_2.jpg" width="100px" height="100px"> 
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartW_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_w()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartD" style="display: inline-block;" id="cartD">
+                        <img src="diet.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartD_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_D()">
+                </div>
+                <hr>
+                <div>
+                    <figure class="cartC" style="display: inline-block;" id="cartC">
+                        <img src="cook_book_img.jpg" width="100px" height="100px">
+                    </figure>
+                    <div style="display: inline-block; font-size: 30px;">$</div>
+                    <div style="display: inline-block; font-size: 30px;" id="cartC_price">0</div>
+                    <input type="image" src="Bin.png" height="30" width="30" alt="bin" style="padding-left: 80%;" onclick="Remove_C()">
+
+                </div>
+                <hr>
+                <div>
+                    <fieldset style="width:0px">
+                        <label style="font-size: 30px;">
+                            Total:
+                        </label>
+                        <label style="color: red; font-size: 30px;">
+                            $
+                        </label>
+                        <label style="color: red; font-size: 30px;" id="Price">
+                            0
+                        </label>
+                        <br>
+                        <input type="submit" value="Proceed to checkout" style="font-size: 50px;">
+                    </fieldset>
+                    
+                </div>
+                
+              </div>
+        </div> <!--End Cart-->
+
+        <h1 style="text-align: center; font-size: 50px;" id="header">The Ultimate Anabolic Cookbook
+            <label style="float: right;">
+                <section id="item">0</section>
+                <input type="image" src="cart.png" width="50" height="50"  alt="Cart" id="myBtn" onclick="OpenCart()"></label>
+
+            <a href="index.html">
+            <img src="Go Back.png" width="50" height="50" style="float: left;" alt="Go Back"  ></a>
+        </h1>
+        
+
+        <div style="text-align: center;">
+            <section class="sectionTop">
+                <figure><img src="Fork.png" width="110" height="110"></figure>
+                <figcaption class="figCap">
+                    <div style="font-size: 50px;color: brown">Exotic Global Recipes</div><br> Cook, indulge, and fall in love with my new<br> selection of delicious <br> around-the-world flavors!<br><strong>NO PASSPORT REQUIRED!</strong>
+                </figcaption>
+            </section>
+            <section class="sectionTop">
+                <figure><img src="Scale.png" width="110" height="110"></figure>
+                <figcaption class="figCap">
+                    <div style="font-size: 50px;color: brown;">Stupidly Simple</div><br>When I say any moron can make amazingly <br> simple - and tasty food... <strong>I MEAN IT!</strong> Not one<br>recipe in this book is complicated.<br><strong>ZEROOO CHEF KNOWLEDGE NEEDED!</strong>
+                </figcaption>
+            </section>
+            <section class="sectionTop">
+                <figure><img src="Biceps.png" width="110" height="110"></figure>
+                <figcaption class="figCap">
+                    <div style="font-size: 50px;color: brown;">Muscle-Building Superfoods</div><br> Filled with protein-rich recipes<br> so your training  work <br> will  <strong>NOT</strong> go to waste!<br><strong>NO FANCY NUTRITIONIST NECESSARY!</strong>
+                </figcaption>
+            </section>
+        </div>
+        <fieldset>
+            <legend>THE ULTIMATE ANABOLIC COOKBOOK (free receipt)</legend>
+            <figure>
+                <img src="Cook_Image.png" width="650px" height="650px" alt="Food_pic" style="float: left;">
+            </figure>
+            <h1 style="text-align: center;">Banana "No"tella French Toast Roll-Ups</h1>
+            <div>
+                <table border="1" align="center">
+                    <thead>
+                        <th>VEGETARIAN</th>
+                        <th style="text-align: center;">PREP TIME<br>10 Minutes</th>
+                        <th style="text-align: center;">READY IN <br>20 Minutes</th>
+                    </thead>
+                </table>
+                <section style="text-align: center;">
+                    <div style="display: inline-block; background-color:rgb(214, 214, 214);">
+                        <p><strong style="font-size: 30px;">Ingredients</strong><br>
+                            MAKES 2 ROLL-UPS (I SERVING)<br> 
+                            FILLING :<br> 
+                            30g banana<br> 
+                            Bg (¼ scoop) chocolate peanut butter protein<br> 
+                            powder<br> 
+                            2.Sg (½ tbsp) cacao powder<br> 
+                            15ml (1 tbsp) water<br> 
+                            FRENCH TOAST BASE :<br> 
+                            2 slices regular bread (up to 80 cal per slice)<br> 
+                            120g (½ cup) egg whites<br>
+                            2 packets (4 tsp) sweetener<br> 
+                            ½ tsp cinnamon<br> 
+                            ¼ tsp vanilla extract<br> 
+                            Cooking spray<br> 
+                            TOPPINGS :<br> 
+                            3g (½ tbsp) powdered peanut butter (PB2)<br> 
+                            40g strawberries<br> 
+                            30ml (2 tbsp) sugar-free syrup (10 calories) </p>
+                    </div>
+                    <div style="display: inline-block;">
+                        
+                        <ol type="1">
+                            <strong style="font-size: 30px;">Directions</strong>
+                            <li>In a bowl, mix the filling ingredients with a fork or whisk<br>
+                                until a thick & uniform paste is formed.</li>
+                            <li>In a bowl, mix the filling ingredients with a fork or whisk<br> 
+                                until a thick & uniform paste is formed.</li>
+                            <li>Roll up the bread and pinch around the edges to seal in<br> 
+                                the filling (like a burrito).</li>
+                            <li>Whisk egg whites, cinnamon and vanilla extract into a<br> 
+                                bowl until fully mixed.</li>
+                            <li>Heat a pan over medium heat, and spray with cooking<br> 
+                                spray.</li>
+                            <li>Once the pan has achieved medium heat, submerge<br> 
+                                the sealed bread pockets into the egg white/cinnamon/<br> 
+                                vanilla extract mixture.</li>
+                            <li>Remove and place onto the pan until the egg whites are<br> 
+                                fully cooked.</li>
+                            <li>Remove from the pan and plate with optional toppings<br> 
+                                of powdered peanut butter (either mixed with water<br> 
+                                or dry), strawberries, and sugar-free syrup. Serve and<br> 
+                                enjoy!</li>
+                        </ol>
+                    </div>
+            </section>
+            </div>
+
+        </fieldset>
+
+
+        <sections style="text-align: center;">
+            <h1 style="text-align: justify center; color: brown; font-size: 80px;">My shiny new cookbook<br> is here... AND IT'S<br> SERIOUSLY PACKED!</h1>
+            <h3 style="color: red; font-size: 40px;">Think you need to be a great chef to make great-tasting food?</h3>
+            <p style="font-size: 30px;">Noooo!!<br><br> ANYONE can do this. Imagine being able to cook fulfilling, delicious, and low-calorie dishes like...<br ><br><strong style="font-size: 40px; color: red;">HEALTHY...</strong> <br><br> Anabolic Lasagna<br><br><strong>AND MUCH MORE!</strong></p>
+        </section>
+
+        <section style="background-color: black;">
+            <h1 style="color: red; font-size: 60px;" >You know the saying...</h1><br>
+            <h2 style="color: white;">‘Give a man a fish and you feed him for a day.<br><br>
+                Teach a man to fish and you feed him for a lifetime.’<br><br>
+                The EXACT same idea can be applied to my new cookbook! Once you can cook my easy recipes once...</h2>
+            <h1 style="color: red; font-size: 40px;" >YOU TOO CAN MAKE THEM<br>FOR A LIFETIME!</h1><br>
+            <h2 style="color: white;">
+                Never wonder what to eat next EVER again...<br><br>
+                No more eating plain jane food you find COMPLETELY boring...<br><br>
+                And… NO MORE excuses!<br><br>
+                This book will arm you with the ability to prepare incredible and tasty dishes, WITHOUT the hours of prep usually needed!
+            </h2> 
+            <br>
+        </section>
+        <div>
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="diet.jpg" alt="Diet Book" style="width:100%">
+                    <h1>Diet Book</h1>
+                    <p class="price">$100.00</p>
+                    <p><button onclick="AddDiet()">Add to Cart</button></p>
+                  </div>
+            </section>
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="cook_book_img.jpg" alt="Cook Book" style="width:100%">
+                    <h1>Cook Book</h1>
+                    <p class="price">$199.00</p>
+                    <p><button onclick="AddCook()">Add to Cart</button></p>
+                </div>
+                <marquee width="100%" direction="right" style="color: red; font-size: 30px;">Buy my Cook Book!</marquee>
+            </section>
+            <section style="display: inline-block; padding: 40px;">
+                <br><br>
+                <div class="card">
+                    <img src="workout_plans_img_2.jpg" alt="Workout plans image" style="width:100%">
+                    <h1>Training Book</h1>
+                    <p class="price">$140.00</p>
+                    <p><button onclick="AddPlan()">Add to Cart</button></p>
+                  </div>
+            </section>
+        </div>
+        
+        <hr> <!--Line-->
+        <br><br><br>
+
+        <footer> <!--Footer-->
+            <a href="#header" style="float:right; font-size: 50px;"><img src="Arrow.png" height="110px" width="110px" alt="GO Up"></a> <!--Go UP-->
+            
+           
+            <div style="float: left;">
+
+                
+                <figure class="button input">
+                    <a href="index.html"><img src="Website logo.jpg" height="350px" width="350px"></a>
+                    <figcaption></figcaption>   
+                </figure>
+                
+
+                <figure class="button input"> <!--IMAGE 2-->
+                    <section class="image_div">
+                        <a href="Training_book.html"><img src="workout_plans_img_2.jpg" height="350px" width="350px" alt="Workout plan">
+                        <div>Contains a detailed set of instructions for all sorts of people who want to 
+                            continue improving or get started on their physique, strength, and overall 
+                            fitness.</div></a>
+                    </section> 
+                    <figcaption>Workout Plans</figcaption>
+                </figure> <!--END OF IMAGE 2-->
+        
+        
+        
+                <figure class="button input"> <!--IMAGE 3-->
+                    <section class="image_div">
+                        <a href="Diet_book.html"><img src="diet.jpg" height="350px" width="350px" alt="Diet Methodologies">
+                        <div>You will learn how to lose weight and keep it off FOR LIFE.</div></a>
+                    </section>
+                    <figcaption>Dieting</figcaption>
+                </figure> <!--END OF IMAGE 3-->
+                
+            </div>
+        </footer>   <!--End of Footer-->
+    </body>
+</html>
